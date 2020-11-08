@@ -27,29 +27,37 @@ namespace Progmet_Adressbok
             string fileName = @"C:\Users\Oscar\bin\adressbok.txt";
             List<Person> people = new List<Person>();
             bool quit = false;
-            
-            using (StreamReader file = new StreamReader(fileName))
+            string[] telbok = File.ReadAllLines(fileName);
+            string[] k = new string[4];
+            for (int i = 0; i < telbok.Length; i++)
+            {
+                k = telbok[i].Split('#');
+                people.Add(new Person(k[0], k[1], k[2], k[3]));
+            }
+            /*using (StreamReader file = new StreamReader(fileName))
+
             {
 
                 //Test
                 while ((fileName = file.ReadLine()) != null)
                 {
-                    string[] info = fileName.Split(',');
+                    string[] info = fileName.Split('#');
                     // Console.WriteLine(line);
                     // Console.WriteLine("{0} - {1}", words[0], words[1]);
                     people.Add(new Person(info[0], info[1], info[2], info[3]));
                 }
                 file.Close();
 
-            }
-            for (int i = 0; i < people.Count; i++)
+            }*/
+            /*for (int i = 0; i < people.Count; i++)
             {
                 if (people[i] != null)
                 {
                     Console.WriteLine("{0}, {1}, {2}, {3}",
                         people[i].newname, people[i].newadress, people[i].newphone, people[i].newemail);
                 }
-            }
+            }*/
+            Menu();
             while (!quit)
             {
                 Console.Write(">");
@@ -88,6 +96,14 @@ namespace Progmet_Adressbok
                     string mail = Console.ReadLine();
                     people.Add(new Person(name, address, phone, mail));
                     Console.WriteLine("New contact added!");
+                    using (StreamWriter writerDoc = new StreamWriter(fileName))
+                    {
+                        for (int i = 0; i < people.Count(); i++)
+                        {
+                            writerDoc.WriteLine("{0}#{1}#{2}#{3}", people[i].newname, people[i].newadress, people[i].newphone, people[i].newemail);
+
+                        }
+                    }
 
                 }
                 else if (input == "radera")
@@ -103,9 +119,29 @@ namespace Progmet_Adressbok
                         }
                         
                     }
-                   
+                    using (StreamWriter writerDoc = new StreamWriter(fileName))
+                    {
+                        for (int i = 0; i < people.Count(); i++)
+                        {
+                            writerDoc.WriteLine("{0}#{1}#{2}#{3}", people[i].newname, people[i].newadress, people[i].newphone, people[i].newemail);
+
+                        }
+                    }
                 }
+
             }
+        }
+        static void Menu()
+        {
+            Console.Clear();
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("     Välkommen till din Adressbok!    ");
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine(" 'visa' för att se dina kontakter     ");
+            Console.WriteLine(" 'ny' för at skapa en ny kontakt      ");
+            Console.WriteLine(" 'radera' för at ta bort en kontakt   ");
+            Console.WriteLine(" 'avsluta' för att stänga programmet  ");
+            Console.WriteLine("--------------------------------------");
         }
     }
 }
