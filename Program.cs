@@ -31,7 +31,7 @@ namespace Progmet_Adressbok
             using (StreamReader file = new StreamReader(fileName))
             {
 
-
+                //Test
                 while ((fileName = file.ReadLine()) != null)
                 {
                     string[] info = fileName.Split(',');
@@ -54,11 +54,11 @@ namespace Progmet_Adressbok
             {
                 Console.Write(">");
                 string input = Console.ReadLine();
-                if (input == "quit")
+                if (input == "avsluta")
                 {
                     return;
                 }
-                else if (input == "show")
+                else if (input == "visa")
                 {
                     Console.WriteLine("{0,-17}{1,-23}{2,-14}{3}", "Namn", "Adress", "Telefon", "Email");
                     Console.WriteLine("*************************************************************************************************");
@@ -75,7 +75,7 @@ namespace Progmet_Adressbok
                     }
                     Console.WriteLine("*************************************************************************************************");
                 }
-                else if (input == "add")
+                else if (input == "ny")
                 {
 
                     Console.Write("New contact name: ");
@@ -89,6 +89,21 @@ namespace Progmet_Adressbok
                     people.Add(new Person(name, address, phone, mail));
                     Console.WriteLine("New contact added!");
 
+                }
+                else if (input == "radera")
+                {
+                    Console.Write("Skriv namnet på personen du vill ta bort från dina kontakter: ");
+                    string name = Console.ReadLine().ToLower();
+                    for (int i = 0; i < people.Count; i++)
+                    {
+                        if (name == people[i].newname.ToLower())
+                        {
+                            Console.WriteLine("Tog bort {0} från dina kontakter", name);
+                            people.RemoveAt(i);
+                        }
+                        
+                    }
+                   
                 }
             }
         }
