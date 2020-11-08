@@ -119,8 +119,8 @@ namespace Progmet_Adressbok
             Console.WriteLine("     Välkommen till din Adressbok!    ");
             Console.WriteLine("--------------------------------------");
             Console.WriteLine(" 'visa' för att se dina kontakter     ");
-            Console.WriteLine(" 'ny' för at skapa en ny kontakt      ");
-            Console.WriteLine(" 'radera' för at ta bort en kontakt   ");
+            Console.WriteLine(" 'ny' för att skapa en ny kontakt      ");
+            Console.WriteLine(" 'radera' för att ta bort en kontakt   ");
             Console.WriteLine(" 'avsluta' för att stänga programmet  ");
             Console.WriteLine("--------------------------------------");
             Console.WriteLine("    Kontakter sparas automatiskt!     ");
