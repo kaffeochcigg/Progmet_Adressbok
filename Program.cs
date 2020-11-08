@@ -29,7 +29,7 @@ namespace Progmet_Adressbok
             string[] infobook = File.ReadAllLines(fileName); //found@https://www.c-sharpcorner.com/UploadFile/mahesh/how-to-read-a-text-file-in-C-Sharp/          
             for (int i = 0; i < infobook.Length; i++)
             {
-                string[] info = infobook[i].Split('#');
+                string[] info = infobook[i].Split(',');
                 people.Add(new Person(info[0], info[1], info[2], info[3]));
             }
 
@@ -64,7 +64,7 @@ namespace Progmet_Adressbok
                 }
                 else if (input == "ny")
                 {
-                    Console.Write("Ange namn: ");
+                    Console.Write("\nAnge namn: ");
                     string name = Console.ReadLine();
                     Console.Write("Ange adress: ");
                     string address = Console.ReadLine();
@@ -73,36 +73,35 @@ namespace Progmet_Adressbok
                     Console.Write("Ange E-mail: ");
                     string mail = Console.ReadLine();
                     people.Add(new Person(name, address, phone, mail));
-                    Console.WriteLine("Ny kontakt tillagd");
+                    Console.WriteLine("\nNy kontakt tillagd");
                     //Saving right away when adding new
                     using (StreamWriter sw = new StreamWriter(fileName))
                     {
                         for (int i = 0; i < people.Count(); i++)
                         {
-                            sw.WriteLine("{0}#{1}#{2}#{3}", people[i].name, people[i].adress, people[i].phone, people[i].email);
+                            sw.WriteLine("{0}, {1}, {2}, {3}", people[i].name, people[i].adress, people[i].phone, people[i].email);
 
                         }
                     }
                 }
                 else if (input == "radera")
                 {
-                    Console.Write("Skriv namnet på personen du vill ta bort från dina kontakter: ");
+                    Console.Write("\nSkriv namnet på personen du vill\nta bort från dina kontakter: ");
                     string name = Console.ReadLine().ToLower();
                     for (int i = 0; i < people.Count; i++)
                     {
                         if (name == people[i].name.ToLower())
                         {
-                            Console.WriteLine("Tog bort {0} från dina kontakter", name);
+                            Console.WriteLine("\nTog bort {0} från dina kontakter", name);
                             people.RemoveAt(i);
-                        }
-
+                        }                        
                     }
                     //Deleting right away
                     using (StreamWriter sw = new StreamWriter(fileName))
                     {
                         for (int i = 0; i < people.Count(); i++)
                         {
-                            sw.WriteLine("{0}#{1}#{2}#{3}", people[i].name, people[i].adress, people[i].phone, people[i].email);
+                            sw.WriteLine("{0}, {1}, {2}, {3}", people[i].name, people[i].adress, people[i].phone, people[i].email);
 
                         }
                     }
